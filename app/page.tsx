@@ -1,441 +1,605 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ProLeast — Apollo Lead Generation, Starting at $4.49",
+  title: "Ashik — Adobe Plugin Developer",
   description:
-    "Scrape 1,000+ Apollo leads with no Chrome extension. Starting at just $4.49.",
+    "Custom Adobe plugins built with CEP & UXP. Automate complex Photoshop, Illustrator, and InDesign workflows.",
 };
 
-// ─── Pricing data ─────────────────────────────────────────────────────────────
-const pricing = [
-  { no: 1, leads: "1K", price: "$4.49" },
-  { no: 2, leads: "2K", price: "$8.98" },
-  { no: 3, leads: "3K", price: "$13.47" },
-  { no: 4, leads: "4K", price: "$17.96" },
-  { no: 5, leads: "5K", price: "$22.45" },
-  { no: 6, leads: "6K", price: "$26.94" },
+const services = [
+  {
+    tag: "UXP · CEP",
+    app: "Photoshop",
+    icon: "Ps",
+    color: "#31A8FF",
+    title: "Photoshop Automation",
+    desc: "Batch processing, smart object pipelines, layer management automation, and custom export workflows that eliminate repetitive manual work.",
+    bullets: [
+      "Batch image processing & export",
+      "Layer / smart object automation",
+      "Custom panel UI with live preview",
+      "Script-driven asset generation",
+    ],
+  },
+  {
+    tag: "UXP · CEP",
+    app: "Illustrator",
+    icon: "Ai",
+    color: "#FF9A00",
+    title: "Illustrator Workflow Tools",
+    desc: "Automate vector production, symbol libraries, artboard management, and complex multi-file operations directly inside Illustrator.",
+    bullets: [
+      "Artboard & symbol management",
+      "Bulk SVG / PDF export pipelines",
+      "Dynamic text & data-driven design",
+      "Custom toolbars & shortcut panels",
+    ],
+  },
+  {
+    tag: "UXP · CEP",
+    app: "InDesign",
+    icon: "Id",
+    color: "#FF3366",
+    title: "InDesign Publishing",
+    desc: "Data merge at scale, automated layout generation, style enforcement, and one-click multi-format publishing for print and digital.",
+    bullets: [
+      "Data-driven layout automation",
+      "Paragraph & style enforcement",
+      "Multi-format export (PDF, EPUB, HTML)",
+      "Template & master page scripting",
+    ],
+  },
+];
+
+const process = [
+  { step: "01", title: "Discovery", desc: "We map your current workflow, find the friction points, and define exactly what the plugin needs to do." },
+  { step: "02", title: "Architecture", desc: "I design the plugin structure — CEP panel or UXP manifest, host communication layer, and UI scaffold." },
+  { step: "03", title: "Build", desc: "Iterative development with regular check-ins. You see working prototypes early, not just at the end." },
+  { step: "04", title: "Deliver", desc: "Packaged, signed, and documented. I handle installation and provide support to keep things running smoothly." },
 ];
 
 export default function Page() {
   return (
-    <div className="bg-[#0b0f0e] text-[#e8ede9] min-h-screen antialiased font-sans">
-      {/* ── Google Fonts ─────────────────────────────────────────────── */}
+    <div className="bg-[#0e0e0e] text-[#e2ddd6] min-h-screen antialiased">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500&display=swap');
-        .font-serif-display { font-family: 'Instrument Serif', Georgia, serif; }
-        .font-mono-tight    { font-family: 'Geist Mono', monospace; }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        .font-display { font-family: 'Playfair Display', Georgia, serif; }
+        .font-mono    { font-family: 'IBM Plex Mono', monospace; }
+
         @keyframes fadeUp {
-          from { opacity:0; transform:translateY(20px); }
-          to   { opacity:1; transform:translateY(0); }
+          from { opacity: 0; transform: translateY(24px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
-        .fade-up { animation: fadeUp .65s ease both; }
-        .d1 { animation-delay:.05s; }
-        .d2 { animation-delay:.18s; }
-        .d3 { animation-delay:.32s; }
-        .d4 { animation-delay:.46s; }
-        .airtable-embed { width:100%; height:533px; border:none; }
-        .yt-embed { aspect-ratio:16/9; width:100%; border:none; border-radius:16px; }
+        @keyframes shimmer {
+          0%   { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50%      { opacity: 0; }
+        }
+
+        .fade-up   { animation: fadeUp .7s ease both; }
+        .d1 { animation-delay: .08s; }
+        .d2 { animation-delay: .2s; }
+        .d3 { animation-delay: .34s; }
+        .d4 { animation-delay: .48s; }
+        .d5 { animation-delay: .62s; }
+
+        .shimmer-text {
+          background: linear-gradient(90deg, #c8a96e 0%, #f0d89a 40%, #c8a96e 60%, #9a7a45 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: shimmer 4s linear infinite;
+        }
+
+        .service-card {
+          background: #141414;
+          border: 1px solid #222;
+          border-radius: 2px;
+          padding: 40px 36px;
+          transition: border-color .3s, transform .3s;
+          position: relative;
+          overflow: hidden;
+        }
+        .service-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(135deg, transparent 60%, rgba(200,169,110,0.04) 100%);
+          pointer-events: none;
+        }
+        .service-card:hover {
+          border-color: #c8a96e44;
+          transform: translateY(-3px);
+        }
+
+        .app-badge {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 44px;
+          height: 44px;
+          border-radius: 10px;
+          font-family: 'IBM Plex Mono', monospace;
+          font-weight: 500;
+          font-size: 13px;
+          letter-spacing: -0.03em;
+        }
+
+        .process-row {
+          display: grid;
+          grid-template-columns: 80px 1fr;
+          gap: 0 32px;
+          padding: 36px 0;
+          border-bottom: 1px solid #1c1c1c;
+          transition: background .2s;
+        }
+        .process-row:hover { background: #121212; }
+        .process-row:last-child { border-bottom: none; }
+
+        .nav-link {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 11px;
+          letter-spacing: .12em;
+          text-transform: uppercase;
+          color: #5a5550;
+          transition: color .25s;
+          cursor: pointer;
+          text-decoration: none;
+        }
+        .nav-link:hover { color: #c8a96e; }
+
+        .cta-btn {
+          display: inline-block;
+          background: #c8a96e;
+          color: #0e0e0e;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: .1em;
+          text-transform: uppercase;
+          padding: 14px 32px;
+          border-radius: 2px;
+          text-decoration: none;
+          transition: background .25s, box-shadow .25s, transform .2s;
+        }
+        .cta-btn:hover {
+          background: #d9bc85;
+          box-shadow: 0 8px 32px rgba(200,169,110,.25);
+          transform: translateY(-1px);
+        }
+
+        .ghost-btn {
+          display: inline-block;
+          border: 1px solid #2e2e2e;
+          color: #5a5550;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 12px;
+          letter-spacing: .1em;
+          text-transform: uppercase;
+          padding: 14px 32px;
+          border-radius: 2px;
+          text-decoration: none;
+          transition: border-color .25s, color .25s;
+        }
+        .ghost-btn:hover { border-color: #c8a96e44; color: #c8a96e; }
+
+        .bullet-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 11.5px;
+          color: #6a6560;
+          line-height: 1.6;
+          padding: 7px 0;
+          border-bottom: 1px solid #1c1c1c;
+        }
+        .bullet-item:last-child { border-bottom: none; }
+        .bullet-item::before {
+          content: '—';
+          color: #c8a96e;
+          flex-shrink: 0;
+          margin-top: 1px;
+        }
+
+        .section-eyebrow {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 10px;
+          letter-spacing: .22em;
+          text-transform: uppercase;
+          color: #c8a96e;
+        }
+
+        .tech-pill {
+          font-family: 'IBM Plex Mono', monospace;
+          font-size: 10px;
+          letter-spacing: .1em;
+          text-transform: uppercase;
+          border: 1px solid #2a2a2a;
+          color: #5a5550;
+          padding: 5px 12px;
+          border-radius: 1px;
+          transition: border-color .2s, color .2s;
+        }
+        .tech-pill:hover { border-color: #c8a96e44; color: #c8a96e; }
+
+        /* Noise overlay */
+        .noise::after {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+          pointer-events: none;
+          z-index: 999;
+          opacity: .35;
+        }
+
+        .cursor-blink {
+          display: inline-block;
+          width: 2px;
+          height: 1em;
+          background: #c8a96e;
+          margin-left: 4px;
+          vertical-align: middle;
+          animation: blink 1s step-end infinite;
+        }
+
+        .contact-card {
+          background: #141414;
+          border: 1px solid #222;
+          border-radius: 2px;
+          padding: 28px 32px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          text-decoration: none;
+          transition: border-color .3s, transform .3s;
+        }
+        .contact-card:hover {
+          border-color: #c8a96e44;
+          transform: translateY(-2px);
+        }
       `}</style>
 
-      {/* ── Nav ──────────────────────────────────────────────────────── */}
-      <nav className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 sm:px-12 py-4 bg-[#0b0f0e]/80 backdrop-blur-md border-b border-white/5">
-        <span className="font-mono-tight text-sm font-medium tracking-tight">
-          pro<span className="text-[#4dffb4]">leadlist</span>.com
+      {/* ── NAV ─────────────────────────────────────────────────── */}
+      <nav
+        style={{
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          padding: "0 6%", height: "60px",
+          background: "rgba(14,14,14,0.9)", backdropFilter: "blur(12px)",
+          borderBottom: "1px solid #1a1a1a",
+        }}
+      >
+        <span className="font-mono" style={{ fontSize: 13, letterSpacing: "-.02em", color: "#e2ddd6" }}>
+          ashik<span style={{ color: "#c8a96e" }}>.dev</span>
         </span>
-        <a
-          href="#contact"
-          className="bg-[#4dffb4] text-[#0b0f0e] text-xs font-bold font-mono-tight px-4 py-2 rounded-full tracking-wide hover:brightness-110 transition-all"
-        >
-          Get Started →
-        </a>
+        <div style={{ display: "flex", alignItems: "center", gap: 36 }}>
+          {["Services", "Process", "Contact"].map(n => (
+            <a key={n} href={`#${n.toLowerCase()}`} className="nav-link">{n}</a>
+          ))}
+          <a href="#contact" className="cta-btn" style={{ padding: "9px 22px", fontSize: 11 }}>Hire Me</a>
+        </div>
       </nav>
 
-      {/* ════════════════════════════════════════════════════════════════
-          1 · INTRO / HERO
-      ════════════════════════════════════════════════════════════════ */}
+      {/* ═══════════════════════════════════════════════════════════
+          HERO
+      ═══════════════════════════════════════════════════════════ */}
       <section
-        id="intro"
-        className="relative min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 pb-20 overflow-hidden"
+        style={{
+          minHeight: "100vh", display: "flex", flexDirection: "column",
+          justifyContent: "center", padding: "120px 6% 80px",
+          position: "relative", overflow: "hidden",
+        }}
       >
-        {/* Background mesh */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full bg-[#4dffb4]/6 blur-[120px]" />
-          <div className="absolute bottom-0 right-0 w-[400px] h-[300px] rounded-full bg-emerald-600/5 blur-[100px]" />
-          {/* grid lines */}
-          <svg
-            className="absolute inset-0 w-full h-full opacity-[0.04]"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+        {/* background geometry */}
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+          <div style={{
+            position: "absolute", top: "10%", right: "-5%",
+            width: 600, height: 600, borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(200,169,110,0.07) 0%, transparent 70%)",
+          }} />
+          <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: .03 }}>
             <defs>
-              <pattern
-                id="grid"
-                width="60"
-                height="60"
-                patternUnits="userSpaceOnUse"
-              >
-                <path
-                  d="M 60 0 L 0 0 0 60"
-                  fill="none"
-                  stroke="#4dffb4"
-                  strokeWidth="0.5"
-                />
+              <pattern id="g" width="48" height="48" patternUnits="userSpaceOnUse">
+                <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#c8a96e" strokeWidth="0.6" />
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
+            <rect width="100%" height="100%" fill="url(#g)" />
           </svg>
+          <div style={{
+            position: "absolute", top: "30%", right: "8%",
+            width: 1, height: "50%", background: "linear-gradient(180deg, transparent, #c8a96e22, transparent)",
+          }} />
         </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* badge */}
-          <div className="fade-up d1 inline-flex items-center gap-2 bg-[#4dffb4]/10 border border-[#4dffb4]/20 rounded-full px-4 py-1.5 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#4dffb4] animate-pulse" />
-            <span className="font-mono-tight text-[11px] text-[#4dffb4] tracking-widest uppercase">
-              No Chrome Extension Required
-            </span>
+        {/* ── same maxWidth + margin:auto as other sections ── */}
+        <div style={{ maxWidth: 1100, margin: "0 auto", width: "100%", position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 40 }}>
+
+          {/* left: text content */}
+          <div style={{ flex: 1 }}>
+            <div className="fade-up d1" style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
+              <span className="section-eyebrow">Adobe Plugin Developer</span>
+              <span style={{ flex: 1, height: 1, background: "#2a2a2a", maxWidth: 48 }} />
+              <span className="font-mono" style={{ fontSize: 10, color: "#3a3530", letterSpacing: ".1em" }}>CEP · UXP · ExtendScript</span>
+            </div>
+
+            <h1
+              className="font-display fade-up d2"
+              style={{
+                fontSize: "clamp(3rem, 7.5vw, 6rem)",
+                lineHeight: 1.02, fontWeight: 900,
+                letterSpacing: "-.03em", marginBottom: 28,
+              }}
+            >
+              Automate the
+              <br />
+              <span className="shimmer-text">Impossible</span>
+              <br />
+              in Adobe.
+            </h1>
+
+            <p
+              className="fade-up d3"
+              style={{
+                fontSize: "1.05rem", lineHeight: 1.8,
+                color: "#6a6560", maxWidth: 520, marginBottom: 48,
+              }}
+            >
+              I build production-grade plugins for Photoshop, Illustrator, and InDesign — turning multi-hour manual workflows into a single button click using CEP panels and UXP APIs.
+            </p>
+
+            <div className="fade-up d4" style={{ display: "flex", gap: 14, flexWrap: "wrap", marginBottom: 64 }}>
+              <a href="#contact" className="cta-btn">Start a Project</a>
+              <a href="#services" className="ghost-btn">See What I Build ↓</a>
+            </div>
+
+            <div className="fade-up d5" style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              {["CEP Panels", "UXP APIs", "ExtendScript", "React UI", "Node Bridge", "ZXP Packaging"].map(t => (
+                <span key={t} className="tech-pill">{t}</span>
+              ))}
+            </div>
           </div>
 
-          {/* headline */}
-          <h1 className="fade-up d2 font-serif-display text-[clamp(2.8rem,7vw,6.5rem)] leading-[1.05] tracking-tight text-white">
-            Easily Scrape <span className="italic text-[#4dffb4]">1,000+</span>
-            <br />
-            Apollo Leads
-          </h1>
-
-          <p className="fade-up d3 mt-6 text-base sm:text-lg text-[#7a8c82] max-w-2xl mx-auto leading-relaxed">
-            Bypass Chrome extensions and enjoy direct access to thousands of
-            Apollo leads, all for a starting price of just{" "}
-            <span className="text-white font-semibold">$4.49</span>. Elevate
-            your sales strategy with our streamlined and cost-effective solution
-            with{" "}
-            <a
-              href="https://www.proleadlist.com/"
-              target="_blank"
-              className="text-[#4dffb4] font-mono-tight text-sm"
-            >
-              proleadlist.com
-            </a>
-            .
-          </p>
-
-          <div className="fade-up d4 mt-10 flex flex-wrap gap-4 justify-center">
-            <a
-              href="#contact"
-              className="bg-[#4dffb4] text-[#0b0f0e] font-bold font-mono-tight text-sm px-8 py-4 rounded-full hover:brightness-110 hover:-translate-y-0.5 transition-all shadow-[0_0_40px_rgba(77,255,180,0.25)]"
-            >
-              Get Started — from $4.49
-            </a>
-            <a
-              href="#pricing"
-              className="border border-white/10 text-[#7a8c82] font-mono-tight text-sm px-8 py-4 rounded-full hover:border-white/25 hover:text-white transition-all"
-            >
-              View Pricing ↓
-            </a>
-          </div>
-
-          {/* trust bar */}
-          <div className="mt-16 flex flex-wrap justify-center gap-8">
+          {/* right: app icons */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 14, flexShrink: 0 }}>
             {[
-              ["1M+", "Leads Exported"],
-              ["$4.49", "Starting Price"],
-              ["8–10h", "Delivery Time"],
-            ].map(([num, label]) => (
-              <div key={label} className="text-center">
-                <p className="font-serif-display text-3xl text-white">{num}</p>
-                <p className="font-mono-tight text-[11px] text-[#4a5c52] tracking-widest uppercase mt-1">
-                  {label}
-                </p>
+              { label: "Ps", color: "#31A8FF", bg: "#001a2e" },
+              { label: "Ai", color: "#FF9A00", bg: "#2a1800" },
+              { label: "Id", color: "#FF3366", bg: "#2a0015" },
+            ].map(({ label, color, bg }) => (
+              <div key={label} style={{
+                width: 56, height: 56, borderRadius: 12, background: bg,
+                border: `1px solid ${color}22`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontFamily: "'IBM Plex Mono', monospace", fontWeight: 500,
+                fontSize: 14, color, letterSpacing: "-.02em",
+              }}>
+                {label}
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          SERVICES
+      ═══════════════════════════════════════════════════════════ */}
+      <section id="services" style={{ padding: "120px 6%", position: "relative" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+
+          <div style={{ marginBottom: 72 }}>
+            <p className="section-eyebrow" style={{ marginBottom: 14 }}>What I Build</p>
+            <h2
+              className="font-display"
+              style={{ fontSize: "clamp(2rem,4.5vw,3.2rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-.02em" }}
+            >
+              One plugin. Thousands of{" "}
+              <span style={{ fontStyle: "italic", color: "#c8a96e" }}>hours saved.</span>
+            </h2>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 2 }}>
+            {services.map((s) => (
+              <div key={s.app} className="service-card">
+                {/* header */}
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 28 }}>
+                  <div
+                    className="app-badge"
+                    style={{ background: `${s.color}15`, color: s.color, border: `1px solid ${s.color}30` }}
+                  >
+                    {s.icon}
+                  </div>
+                  <span className="font-mono" style={{ fontSize: 10, color: "#3a3530", letterSpacing: ".12em", textTransform: "uppercase" }}>{s.tag}</span>
+                </div>
+
+                <h3
+                  className="font-display"
+                  style={{ fontSize: "1.45rem", fontWeight: 700, marginBottom: 14, letterSpacing: "-.015em" }}
+                >
+                  {s.title}
+                </h3>
+                <p style={{ fontSize: "0.88rem", color: "#6a6560", lineHeight: 1.75, marginBottom: 28 }}>{s.desc}</p>
+
+                {/* bullets */}
+                <div>
+                  {s.bullets.map(b => (
+                    <div key={b} className="bullet-item">{b}</div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* bottom note */}
+          <div style={{ marginTop: 40, padding: "24px 32px", border: "1px solid #1c1c1c", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+            <p className="font-mono" style={{ fontSize: 11, color: "#4a4540", letterSpacing: ".06em" }}>
+              Need a plugin for multiple Adobe apps? I build unified cross-app toolchains.
+            </p>
+            <a href="#contact" className="cta-btn" style={{ fontSize: 11, padding: "10px 24px" }}>Let's Talk →</a>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════
+          PROCESS
+      ═══════════════════════════════════════════════════════════ */}
+      <section id="process" style={{ padding: "120px 6%", background: "#0a0a0a", position: "relative" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto" }}>
+
+          <div style={{ marginBottom: 72 }}>
+            <p className="section-eyebrow" style={{ marginBottom: 14 }}>How It Works</p>
+            <h2
+              className="font-display"
+              style={{ fontSize: "clamp(2rem,4.5vw,3.2rem)", fontWeight: 700, letterSpacing: "-.02em", lineHeight: 1.1 }}
+            >
+              From idea to{" "}
+              <span style={{ fontStyle: "italic", color: "#c8a96e" }}>installed plugin</span>
+              <br />in four steps.
+            </h2>
+          </div>
+
+          <div style={{ borderTop: "1px solid #1c1c1c" }}>
+            {process.map((p) => (
+              <div key={p.step} className="process-row" style={{ paddingLeft: 0, paddingRight: 0 }}>
+                <div>
+                  <span className="font-mono" style={{ fontSize: 11, color: "#c8a96e", letterSpacing: ".1em" }}>{p.step}</span>
+                </div>
+                <div>
+                  <h3
+                    className="font-display"
+                    style={{ fontSize: "1.3rem", fontWeight: 700, letterSpacing: "-.01em", marginBottom: 10 }}
+                  >
+                    {p.title}
+                  </h3>
+                  <p style={{ fontSize: "0.88rem", color: "#6a6560", lineHeight: 1.75 }}>{p.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════════════════════
-          2 · YOUTUBE VIDEO
-      ════════════════════════════════════════════════════════════════ */}
-      <section id="demo" className="px-6 sm:px-12 py-24 max-w-5xl mx-auto">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="font-mono-tight text-[11px] text-[#4dffb4] tracking-widest uppercase">
-            Watch Demo
-          </span>
-          <span className="flex-1 h-px bg-white/5 max-w-[60px]" />
-        </div>
-        <h2 className="font-serif-display text-4xl sm:text-5xl text-white mb-10 leading-tight">
-          See It In Action
-        </h2>
-
-        <div className="relative rounded-2xl overflow-hidden border border-white/8 bg-[#111714] shadow-[0_0_80px_rgba(77,255,180,0.06)]">
-          {/* glow rim */}
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#4dffb4]/40 to-transparent" />
-          <iframe
-            className="yt-embed"
-            src="https://www.youtube.com/embed/xgJZWX3s_f4?si=eCFggkpPVldBx85j"
-            title="ProLeast Demo"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════
-          3 · SAMPLE LEADS (AIRTABLE)
-      ════════════════════════════════════════════════════════════════ */}
-      <section id="samples" className="px-6 sm:px-12 py-24 max-w-5xl mx-auto">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="font-mono-tight text-[11px] text-[#4dffb4] tracking-widest uppercase">
-            Sample Data
-          </span>
-          <span className="flex-1 h-px bg-white/5 max-w-[60px]" />
-        </div>
-        <h2 className="font-serif-display text-4xl sm:text-5xl text-white mb-3 leading-tight">
-          Sample Demo Leads
-        </h2>
-        <p className="text-[#7a8c82] text-sm mb-10 max-w-xl">
-          Export Apollo leads with precision and efficiency. Preview real sample
-          data below before you buy.
-        </p>
-
-        <div className="rounded-2xl overflow-hidden border border-white/8 bg-[#111714] shadow-[0_0_80px_rgba(77,255,180,0.06)]">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#4dffb4]/30 to-transparent" />
-
-          <iframe
-            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTFcWTRq2jucIpcLdcRWfs4iOjUi-dU1b2eB0__ZaPBlpRBhfLK9lHpu8dfKF3Ft_ui2hegNvcyKM4p/pubhtml"
-            className="w-full border-none"
-            style={{ height: "500px" }}
-            title="Sample Demo Leads"
-          />
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════
-          4 · PRICING TABLE
-      ════════════════════════════════════════════════════════════════ */}
-      <section id="pricing" className="px-6 sm:px-12 py-24 max-w-5xl mx-auto">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="font-mono-tight text-[11px] text-[#4dffb4] tracking-widest uppercase">
-            Pricing
-          </span>
-          <span className="flex-1 h-px bg-white/5 max-w-[60px]" />
-        </div>
-        <h2 className="font-serif-display text-4xl sm:text-5xl text-white mb-3 leading-tight">
-          Simple, Pay-As-You-Go
-        </h2>
-        <p className="text-[#7a8c82] text-sm mb-10 max-w-xl">
-          No subscriptions. No hidden fees. Pay only for the leads you need.
-        </p>
-
-        <div className="rounded-2xl overflow-hidden border border-white/8 bg-[#0f1411]">
-          {/* Table header */}
-          <div className="grid grid-cols-3 px-6 py-3 bg-[#4dffb4]/6 border-b border-white/6">
-            {["#", "Leads", "Price"].map((h) => (
-              <p
-                key={h}
-                className="font-mono-tight text-[11px] text-[#4dffb4] tracking-widest uppercase"
-              >
-                {h}
-              </p>
-            ))}
-          </div>
-
-          {pricing.map((row, i) => (
-            <div
-              key={row.no}
-              className={`grid grid-cols-3 px-6 py-4 items-center transition-colors hover:bg-[#4dffb4]/4 ${
-                i !== pricing.length - 1 ? "border-b border-white/5" : ""
-              }`}
+      {/* ═══════════════════════════════════════════════════════════
+          CONTACT
+      ═══════════════════════════════════════════════════════════ */}
+      <section id="contact" style={{ padding: "120px 6% 140px" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <div style={{ marginBottom: 72 }}>
+            <p className="section-eyebrow" style={{ marginBottom: 14 }}>Get in Touch</p>
+            <h2
+              className="font-display"
+              style={{ fontSize: "clamp(2rem,4.5vw,3.2rem)", fontWeight: 700, letterSpacing: "-.02em", lineHeight: 1.1 }}
             >
-              <p className="font-mono-tight text-xs text-[#4a5c52]">
-                {String(row.no).padStart(2, "0")}
-              </p>
-              <p className="font-serif-display text-2xl text-white">
-                {row.leads}
-              </p>
-              <p className="font-mono-tight text-base font-medium text-[#4dffb4]">
-                {row.price}
-              </p>
-            </div>
-          ))}
-
-          {/* Footer note */}
-          <div className="px-6 py-4 bg-[#4dffb4]/4 border-t border-white/6">
-            <p className="font-mono-tight text-[11px] text-[#4a5c52]">
-              Need a custom volume?{" "}
-              <a href="#contact" className="text-[#4dffb4] hover:underline">
-                Contact us
-              </a>{" "}
-              for bulk pricing and partnerships.
+              Have a workflow that{" "}
+              <br />
+              <span style={{ fontStyle: "italic", color: "#c8a96e" }}>deserves automation?</span>
+            </h2>
+            <p style={{ marginTop: 20, fontSize: "0.9rem", color: "#6a6560", lineHeight: 1.8, maxWidth: 480 }}>
+              Tell me what you're building — or what's slowing you down. I'll respond within a few hours.
             </p>
           </div>
-        </div>
 
-        <div className="mt-8 text-center">
-          <a
-            href="#contact"
-            className="inline-block bg-[#4dffb4] text-[#0b0f0e] font-bold font-mono-tight text-sm px-10 py-4 rounded-full hover:brightness-110 hover:-translate-y-0.5 transition-all shadow-[0_0_40px_rgba(77,255,180,0.2)]"
-          >
-            Order Your Leads →
-          </a>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════
-          5 · CONTACT
-      ════════════════════════════════════════════════════════════════ */}
-      <section id="contact" className="px-6 sm:px-12 py-24 max-w-5xl mx-auto">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="font-mono-tight text-[11px] text-[#4dffb4] tracking-widest uppercase">
-            Contact
-          </span>
-          <span className="flex-1 h-px bg-white/5 max-w-[60px]" />
-        </div>
-        <h2 className="font-serif-display text-4xl sm:text-5xl text-white mb-3 leading-tight">
-          Ready to Get Leads?
-        </h2>
-        <p className="text-[#7a8c82] text-sm mb-12 max-w-lg">
-          Reach out on any channel below. We usually respond within a few hours.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Email */}
-          <a
-            href="mailto:kowsera883@gmail.com"
-            className="group flex flex-col gap-4 bg-[#0f1411] border border-white/8 rounded-2xl p-6 hover:border-[#4dffb4]/30 hover:-translate-y-1 transition-all"
-          >
-            <div className="w-12 h-12 rounded-xl bg-[#4dffb4]/10 border border-[#4dffb4]/20 flex items-center justify-center group-hover:bg-[#4dffb4]/15 transition-colors">
-              <svg
-                className="w-5 h-5 text-[#4dffb4]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.8}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-                />
-              </svg>
-            </div>
-            <div>
-              <p className="font-mono-tight text-[10px] text-[#4a5c52] uppercase tracking-widest mb-1">
-                Email
-              </p>
-              <p className="text-sm text-[#c8d9cc] group-hover:text-[#4dffb4] transition-colors break-all">
-                kowsera883@gmail.com
-              </p>
-            </div>
-            <span className="mt-auto self-end text-[#2a3c32] group-hover:text-[#4dffb4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">
-              ↗
-            </span>
-          </a>
-
-          {/* WhatsApp */}
-          <a
-            href="https://wa.me/8801819588407"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-col gap-4 bg-[#0f1411] border border-white/8 rounded-2xl p-6 hover:border-[#4dffb4]/30 hover:-translate-y-1 transition-all"
-          >
-            <div className="w-12 h-12 rounded-xl bg-[#4dffb4]/10 border border-[#4dffb4]/20 flex items-center justify-center group-hover:bg-[#4dffb4]/15 transition-colors">
-              <svg
-                className="w-5 h-5 text-[#4dffb4]"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
-            </div>
-            <div>
-              <p className="font-mono-tight text-[10px] text-[#4a5c52] uppercase tracking-widest mb-1">
-                WhatsApp
-              </p>
-              <p className="text-sm text-[#c8d9cc] group-hover:text-[#4dffb4] transition-colors">
-                01819-588407
-              </p>
-            </div>
-            <span className="mt-auto self-end text-[#2a3c32] group-hover:text-[#4dffb4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">
-              ↗
-            </span>
-          </a>
-
-          {/* LinkedIn */}
-          <a
-            href="https://www.linkedin.com/in/kowser-ahmed-a5048a3a5/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-col gap-4 bg-[#0f1411] border border-white/8 rounded-2xl p-6 hover:border-[#4dffb4]/30 hover:-translate-y-1 transition-all"
-          >
-            <div className="w-12 h-12 rounded-xl bg-[#4dffb4]/10 border border-[#4dffb4]/20 flex items-center justify-center group-hover:bg-[#4dffb4]/15 transition-colors">
-              <svg
-                className="w-5 h-5 text-[#4dffb4]"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </div>
-            <div>
-              <p className="font-mono-tight text-[10px] text-[#4a5c52] uppercase tracking-widest mb-1">
-                LinkedIn
-              </p>
-              <p className="text-sm text-[#c8d9cc] group-hover:text-[#4dffb4] transition-colors">
-                Kowser Ahmed
-              </p>
-            </div>
-            <span className="mt-auto self-end text-[#2a3c32] group-hover:text-[#4dffb4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">
-              ↗
-            </span>
-          </a>
-
-          {/* YouTube */}
-          <a
-            href="https://www.youtube.com/@creativeitzone"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-col gap-4 bg-[#0f1411] border border-white/8 rounded-2xl p-6 hover:border-[#4dffb4]/30 hover:-translate-y-1 transition-all"
-          >
-            <div className="w-12 h-12 rounded-xl bg-[#4dffb4]/10 border border-[#4dffb4]/20 flex items-center justify-center group-hover:bg-[#4dffb4]/15 transition-colors">
-              <svg
-                className="w-5 h-5 text-[#4dffb4]"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-              </svg>
-            </div>
-            <div>
-              <p className="font-mono-tight text-[10px] text-[#4a5c52] uppercase tracking-widest mb-1">
-                YouTube
-              </p>
-              <p className="text-sm text-[#c8d9cc] group-hover:text-[#4dffb4] transition-colors">
-                @creativeitzone
-              </p>
-            </div>
-            <span className="mt-auto self-end text-[#2a3c32] group-hover:text-[#4dffb4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-lg">
-              ↗
-            </span>
-          </a>
-        </div>
-      </section>
-
-      {/* ── Footer ────────────────────────────────────────────────────── */}
-      <footer className="border-t border-white/5 px-6 sm:px-12 py-8 flex flex-wrap items-center justify-between gap-4">
-        <p className="font-mono-tight text-xs text-[#4a5c52]">
-          © 2026 proleast.com · All rights reserved.
-        </p>
-        <div className="flex gap-6">
-          {[
-            { label: "Pricing", href: "#pricing" },
-            { label: "Demo", href: "#demo" },
-            { label: "Contact", href: "#contact" },
-          ].map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="font-mono-tight text-xs text-[#4a5c52] hover:text-[#4dffb4] transition-colors"
-            >
-              {l.label}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 2 }}>
+            {/* Email */}
+            <a href="mailto:kowsera883@gmail.com" className="contact-card">
+              <div style={{
+                width: 40, height: 40, borderRadius: 8,
+                background: "#c8a96e15", border: "1px solid #c8a96e22",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-mono" style={{ fontSize: 10, color: "#3a3530", textTransform: "uppercase", letterSpacing: ".15em", marginBottom: 5 }}>Email</p>
+                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>kowsera883@gmail.com</p>
+              </div>
+              <span style={{ marginTop: "auto", alignSelf: "flex-end", color: "#c8a96e", fontSize: 18 }}>↗</span>
             </a>
+
+            {/* WhatsApp */}
+            <a href="https://wa.me/8801819588407" target="_blank" rel="noopener noreferrer" className="contact-card">
+              <div style={{
+                width: 40, height: 40, borderRadius: 8,
+                background: "#c8a96e15", border: "1px solid #c8a96e22",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#c8a96e">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-mono" style={{ fontSize: 10, color: "#3a3530", textTransform: "uppercase", letterSpacing: ".15em", marginBottom: 5 }}>WhatsApp</p>
+                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>01819-588407</p>
+              </div>
+              <span style={{ marginTop: "auto", alignSelf: "flex-end", color: "#c8a96e", fontSize: 18 }}>↗</span>
+            </a>
+
+            {/* LinkedIn */}
+            <a href="https://www.linkedin.com/in/kowser-ahmed-a5048a3a5/" target="_blank" rel="noopener noreferrer" className="contact-card">
+              <div style={{
+                width: 40, height: 40, borderRadius: 8,
+                background: "#c8a96e15", border: "1px solid #c8a96e22",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#c8a96e">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-mono" style={{ fontSize: 10, color: "#3a3530", textTransform: "uppercase", letterSpacing: ".15em", marginBottom: 5 }}>LinkedIn</p>
+                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>Kowser Ahmed</p>
+              </div>
+              <span style={{ marginTop: "auto", alignSelf: "flex-end", color: "#c8a96e", fontSize: 18 }}>↗</span>
+            </a>
+
+            {/* YouTube */}
+            <a href="https://www.youtube.com/@creativeitzone" target="_blank" rel="noopener noreferrer" className="contact-card">
+              <div style={{
+                width: 40, height: 40, borderRadius: 8,
+                background: "#c8a96e15", border: "1px solid #c8a96e22",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#c8a96e">
+                  <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+              </div>
+              <div>
+                <p className="font-mono" style={{ fontSize: 10, color: "#3a3530", textTransform: "uppercase", letterSpacing: ".15em", marginBottom: 5 }}>YouTube</p>
+                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>@creativeitzone</p>
+              </div>
+              <span style={{ marginTop: "auto", alignSelf: "flex-end", color: "#c8a96e", fontSize: 18 }}>↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ──────────────────────────────────────────────── */}
+      <footer style={{
+        borderTop: "1px solid #1a1a1a",
+        padding: "24px 6%",
+        display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12,
+      }}>
+        <p className="font-mono" style={{ fontSize: 11, color: "#3a3530" }}>
+          © {new Date().getFullYear()} ashik.dev · Adobe Plugin Developer
+        </p>
+        <div style={{ display: "flex", gap: 28 }}>
+          {[["Services", "#services"], ["Process", "#process"], ["Contact", "#contact"]].map(([label, href]) => (
+            <a key={label} href={href} className="nav-link">{label}</a>
           ))}
         </div>
       </footer>
