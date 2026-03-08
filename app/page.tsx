@@ -514,7 +514,7 @@ export default function Page() {
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 2 }}>
             {/* Email */}
-            <a href="mailto:kowsera883@gmail.com" className="contact-card">
+            <a href="mailto:ashikex49@gmail.com" className="contact-card">
               <div style={{
                 width: 40, height: 40, borderRadius: 8,
                 background: "#c8a96e15", border: "1px solid #c8a96e22",
@@ -526,13 +526,13 @@ export default function Page() {
               </div>
               <div>
                 <p className="font-mono" style={{ fontSize: 10, color: "#3a3530", textTransform: "uppercase", letterSpacing: ".15em", marginBottom: 5 }}>Email</p>
-                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>kowsera883@gmail.com</p>
+                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>ashikex49@gmail.com</p>
               </div>
               <span style={{ marginTop: "auto", alignSelf: "flex-end", color: "#c8a96e", fontSize: 18 }}>↗</span>
             </a>
 
             {/* WhatsApp */}
-            <a href="https://wa.me/8801819588407" target="_blank" rel="noopener noreferrer" className="contact-card">
+            <a href="https://wa.me/8801786066566" target="_blank" rel="noopener noreferrer" className="contact-card">
               <div style={{
                 width: 40, height: 40, borderRadius: 8,
                 background: "#c8a96e15", border: "1px solid #c8a96e22",
@@ -544,31 +544,14 @@ export default function Page() {
               </div>
               <div>
                 <p className="font-mono" style={{ fontSize: 10, color: "#3a3530", textTransform: "uppercase", letterSpacing: ".15em", marginBottom: 5 }}>WhatsApp</p>
-                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>01819-588407</p>
+                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>01786066566</p>
               </div>
               <span style={{ marginTop: "auto", alignSelf: "flex-end", color: "#c8a96e", fontSize: 18 }}>↗</span>
             </a>
 
-            {/* LinkedIn */}
-            <a href="https://www.linkedin.com/in/kowser-ahmed-a5048a3a5/" target="_blank" rel="noopener noreferrer" className="contact-card">
-              <div style={{
-                width: 40, height: 40, borderRadius: 8,
-                background: "#c8a96e15", border: "1px solid #c8a96e22",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="#c8a96e">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </div>
-              <div>
-                <p className="font-mono" style={{ fontSize: 10, color: "#3a3530", textTransform: "uppercase", letterSpacing: ".15em", marginBottom: 5 }}>LinkedIn</p>
-                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>Kowser Ahmed</p>
-              </div>
-              <span style={{ marginTop: "auto", alignSelf: "flex-end", color: "#c8a96e", fontSize: 18 }}>↗</span>
-            </a>
 
             {/* YouTube */}
-            <a href="https://www.youtube.com/@creativeitzone" target="_blank" rel="noopener noreferrer" className="contact-card">
+            <a href="https://www.youtube.com/@frontendonly" target="_blank" rel="noopener noreferrer" className="contact-card">
               <div style={{
                 width: 40, height: 40, borderRadius: 8,
                 background: "#c8a96e15", border: "1px solid #c8a96e22",
@@ -580,7 +563,7 @@ export default function Page() {
               </div>
               <div>
                 <p className="font-mono" style={{ fontSize: 10, color: "#3a3530", textTransform: "uppercase", letterSpacing: ".15em", marginBottom: 5 }}>YouTube</p>
-                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>@creativeitzone</p>
+                <p style={{ fontSize: "0.85rem", color: "#c8d0cc" }}>@frontendonly</p>
               </div>
               <span style={{ marginTop: "auto", alignSelf: "flex-end", color: "#c8a96e", fontSize: 18 }}>↗</span>
             </a>
