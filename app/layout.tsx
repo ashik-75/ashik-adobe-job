@@ -1,26 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
+  weight: ["700", "900"],
+  style: ["normal", "italic"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-ibm-plex-mono",
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
 });
 
 export const metadata: Metadata = {
   // ── Core ──────────────────────────────────────────────
-  metadataBase: new URL("https://www.proleadlist.com"),
+  metadataBase: new URL("https://ashik.dev"),
   title: {
-    default: "ProLeast — Apollo Lead Generation, Starting at $4.49",
-    template: "%s | ProLeast",
+    default: "Ashik — Adobe Plugin Developer (CEP & UXP)",
+    template: "%s | Ashik",
   },
   description:
-    "Scrape 1,000+ Apollo leads with no Chrome extension. Starting at just $4.49. Fast delivery in 8–10 hours.",
+    "Custom Adobe plugins built with CEP & UXP for Photoshop, Illustrator, and InDesign. Automate complex workflows and save hours of manual work.",
 
   // ── Canonical ─────────────────────────────────────────
   alternates: {
@@ -29,24 +32,24 @@ export const metadata: Metadata = {
 
   // ── Icons ─────────────────────────────────────────────
   icons: {
-    icon: "/icon.png", // 32×32 or 48×48
+    icon: "/icon.png",
     shortcut: "/favicon.ico",
-    apple: "/apple-icon.png", // 180×180
+    apple: "/apple-icon.png",
   },
 
   // ── Open Graph ────────────────────────────────────────
   openGraph: {
-    title: "ProLeast — Apollo Lead Generation, Starting at $4.49",
+    title: "Ashik — Adobe Plugin Developer (CEP & UXP)",
     description:
-      "Scrape 1,000+ Apollo leads. No Chrome extension needed. From $4.49.",
-    url: "https://www.proleadlist.com",
-    siteName: "ProLeast",
+      "Custom Adobe plugins for Photoshop, Illustrator & InDesign. Automate complex workflows with CEP panels and UXP APIs.",
+    url: "https://ashik.dev",
+    siteName: "Ashik",
     images: [
       {
         url: "/og-image.png", // 1200×630 in /public
         width: 1200,
         height: 630,
-        alt: "ProLeast — Apollo Lead Generation",
+        alt: "Ashik — Adobe Plugin Developer",
       },
     ],
     locale: "en_US",
@@ -56,9 +59,9 @@ export const metadata: Metadata = {
   // ── Twitter / X ───────────────────────────────────────
   twitter: {
     card: "summary_large_image",
-    title: "ProLeast — Apollo Lead Generation, Starting at $4.49",
+    title: "Ashik — Adobe Plugin Developer (CEP & UXP)",
     description:
-      "Scrape 1,000+ Apollo leads. No Chrome extension needed. From $4.49.",
+      "Custom Adobe plugins for Photoshop, Illustrator & InDesign. Automate complex workflows with CEP panels and UXP APIs.",
     images: ["/og-image.png"],
   },
 
@@ -82,7 +85,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${playfair.variable} ${ibmPlexMono.variable} antialiased`}
       >
         {/* JSON-LD Structured Data */}
         <script
@@ -90,22 +93,37 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Service",
-              name: "ProLeast Apollo Lead Generation",
-              url: "https://www.proleadlist.com",
+              "@type": "Person",
+              name: "Ashik",
+              url: "https://ashik.dev",
+              jobTitle: "Adobe Plugin Developer",
               description:
-                "Scrape 1,000+ Apollo leads with no Chrome extension. Starting at $4.49.",
-              provider: {
-                "@type": "Person",
-                name: "Kowser Ahmed",
-                url: "https://www.linkedin.com/in/kowser-ahmed-a5048a3a5/",
+                "Custom Adobe plugins built with CEP & UXP for Photoshop, Illustrator, and InDesign.",
+              knowsAbout: [
+                "Adobe CEP",
+                "Adobe UXP",
+                "ExtendScript",
+                "Photoshop Automation",
+                "Illustrator Automation",
+                "InDesign Automation",
+              ],
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "kowsera883@gmail.com",
+                contactType: "customer support",
               },
+              sameAs: [
+                "https://www.linkedin.com/in/kowser-ahmed-a5048a3a5/",
+                "https://www.youtube.com/@creativeitzone",
+              ],
               offers: {
                 "@type": "Offer",
-                priceCurrency: "USD",
-                price: "4.49",
-                availability: "https://schema.org/InStock",
-                description: "1,000 Apollo leads starting at $4.49",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Custom Adobe Plugin Development",
+                  description:
+                    "Bespoke CEP and UXP plugins for Photoshop, Illustrator, and InDesign to automate complex design workflows.",
+                },
               },
             }),
           }}
